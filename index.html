@@ -7,84 +7,80 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   
+    <!-- Responsive portrait container (no cropping on desktop) -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <style>
-      html, body {
-        min-height: 100svh;
-        display: grid;
-        place-items: center;
-        background: #0f0f10;
-        margin: 0;
-        overflow: hidden;
-      }
+      html, body { height: 100%; margin: 0; }
       body {
-        min-height: 100svh;
+        min-height: 100vh;
         display: grid;
         place-items: center;
-        background: #0f0f10;
-        margin: 0;
+        background: #0f0f10; /* side letterbox */
         overflow: hidden;
       }
-      /* Center the portrait container on desktop */
-      #unity-container.unity-desktop {
-        position: relative !important;
-        margin: 0 auto !important;
-        display: grid !important;
-        place-items: center !important;
-        width: min(100vw, calc(100svh * 9 / 16)) !important;
-        height: min(100svh, calc(100vw * 16 / 9)) !important;
-        aspect-ratio: 9 / 16;
-        overflow: hidden !important;
+      /* Desktop (when Unity didn't mark container as mobile) */
+      #unity-container:not(.unity-mobile) {
+        /* keep 9:16 portrait, fit within viewport */
+        width: min(100vw, calc(100vh * 9 / 16));
+        height: min(100vh, calc(100vw * 16 / 9));
+        position: relative;
+        display: grid;
+        place-items: center;
       }
-      /* Canvas obeys container size */
+      /* Hard-center container on desktop, ignore legacy absolute/right styles */
+      #unity-container:not(.unity-mobile) {
+        margin: 0 auto !important;            /* center as block element */
+        inset: auto !important;               /* reset top/right/bottom/left */
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        position: relative !important;        /* avoid absolute positioning from template */
+      }
+
+      /* Make canvas obey container size even if JS sets inline px */
+      #unity-container:not(.unity-mobile) #unity-canvas {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }
+      /* Keep overlays inside bounds */
+      #unity-container:not(.unity-mobile) #unity-loading-bar,
+      #unity-container:not(.unity-mobile) #unity-warning,
+      #unity-container:not(.unity-mobile) #unity-footer {
+        width: 100% !important;
+        box-sizing: border-box;
+      }
+    
+      #unity-container:not(.unity-mobile) { margin-inline: auto !important; }
+    
+      /* === Hard center the desktop container, no drifting right === */
+      #unity-container.unity-desktop {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        /* keep portrait 9:16, fit within viewport without cropping */
+        width: min(100vw, calc(100vh * 9 / 16)) !important;
+        height: auto !important;              /* height derives from aspect-ratio */
+        max-height: 100vh !important;
+        aspect-ratio: 9 / 16;
+        margin: 0 !important;
+        display: block !important;
+      }
       #unity-container.unity-desktop #unity-canvas {
         width: 100% !important;
         height: 100% !important;
-        display: block !important;
       }
-      /* Loading overlay aligned to the same box */
-      #unity-container.unity-desktop #unity-loading-bar {
-        position: absolute !important;
-        inset: 0 !important;
-        display: grid !important;
-        place-items: center !important;
-        margin: 0 !important;
-        pointer-events: none;
-      }
-      #unity-container.unity-desktop #unity-logo {
-        margin: 0 0 12px 0 !important;
-      }
-      #unity-container.unity-desktop #unity-progress-bar-empty {
-        width: clamp(180px, 50%, 420px) !important;
-        height: 18px !important;
-        box-sizing: border-box;
-      }
-      #unity-container.unity-desktop #unity-progress-bar-full {
-        height: 100% !important;
-      }
-      /* Footer centered at bottom */
+      /* Ensure overlays are constrained to the same box */
+      #unity-container.unity-desktop #unity-loading-bar,
+      #unity-container.unity-desktop #unity-warning,
       #unity-container.unity-desktop #unity-footer {
-        position: absolute !important;
-        left: 50% !important;
-        bottom: 0 !important;
-        transform: translateX(-50%) !important;
         width: 100% !important;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 6px 8px;
+        max-width: 100% !important;
         box-sizing: border-box;
       }
-      /* Warning bar spans top of the same box */
-      #unity-container.unity-desktop #unity-warning {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        box-sizing: border-box;
-      }
+
     </style>
 
   </head>
@@ -179,8 +175,8 @@
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        canvas.style.width = "1080px";
-        canvas.style.height = "1920px";
+        // canvas.style.width = "1080px"; // disabled: CSS controls sizing
+        // canvas.style.height = "1920px"; // disabled: CSS controls sizing
       }
 
       document.querySelector("#unity-loading-bar").style.display = "block";
