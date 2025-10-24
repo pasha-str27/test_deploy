@@ -53,6 +53,33 @@
       }
     
       #unity-container:not(.unity-mobile) { margin-inline: auto !important; }
+    
+      /* === Hard center the desktop container, no drifting right === */
+      #unity-container.unity-desktop {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        /* keep portrait 9:16, fit fully in viewport without cropping */
+        height: min(100vh, calc(100vw * 16 / 9)) !important;
+        width: min(100vw, calc(100vh * 9 / 16)) !important;
+        aspect-ratio: 9 / 16;
+        margin: 0 !important;
+        display: block !important;
+      }
+      #unity-container.unity-desktop #unity-canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+      /* Ensure overlays are constrained to the same box */
+      #unity-container.unity-desktop #unity-loading-bar,
+      #unity-container.unity-desktop #unity-warning,
+      #unity-container.unity-desktop #unity-footer {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+      }
+
     </style>
 
   </head>
