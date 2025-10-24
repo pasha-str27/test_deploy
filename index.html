@@ -60,9 +60,10 @@
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        /* keep portrait 9:16, fit fully in viewport without cropping */
-        height: min(100vh, calc(100vw * 16 / 9)) !important;
+        /* keep portrait 9:16, fit within viewport without cropping */
         width: min(100vw, calc(100vh * 9 / 16)) !important;
+        height: auto !important;              /* height derives from aspect-ratio */
+        max-height: 100vh !important;
         aspect-ratio: 9 / 16;
         margin: 0 !important;
         display: block !important;
