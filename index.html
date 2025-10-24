@@ -6,54 +6,6 @@
     <title>Unity Web Player | iJoyn</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-  
-    <!-- Responsive portrait container (no cropping on desktop) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <style>
-      html, body { height: 100%; margin: 0; }
-      body {
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: #0f0f10; /* side letterbox */
-        overflow: hidden;
-      }
-      /* Desktop (when Unity didn't mark container as mobile) */
-      #unity-container:not(.unity-mobile) {
-        /* keep 9:16 portrait, fit within viewport */
-        width: min(100vw, calc(100vh * 9 / 16));
-        height: min(100vh, calc(100vw * 16 / 9));
-        position: relative;
-        display: grid;
-        place-items: center;
-      }
-      /* Hard-center container on desktop, ignore legacy absolute/right styles */
-      #unity-container:not(.unity-mobile) {
-        margin: 0 auto !important;            /* center as block element */
-        inset: auto !important;               /* reset top/right/bottom/left */
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
-        position: relative !important;        /* avoid absolute positioning from template */
-      }
-
-      /* Make canvas obey container size even if JS sets inline px */
-      #unity-container:not(.unity-mobile) #unity-canvas {
-        display: block !important;
-        background: #000;
-      }
-      /* Keep overlays inside bounds */
-      #unity-container:not(.unity-mobile) #unity-loading-bar,
-      #unity-container:not(.unity-mobile) #unity-warning,
-      #unity-container:not(.unity-mobile) #unity-footer {
-        width: 100% !important;
-        box-sizing: border-box;
-      }
-    
-      #unity-container:not(.unity-mobile) { margin-inline: auto !important; }
-    </style>
-
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -146,8 +98,8 @@
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        // canvas.style.width = "1080px"; // disabled: CSS controls sizing
-        // canvas.style.height = "1920px"; // disabled: CSS controls sizing
+        canvas.style.width = "1080px";
+        canvas.style.height = "1920px";
       }
 
       document.querySelector("#unity-loading-bar").style.display = "block";
