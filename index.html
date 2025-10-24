@@ -13,9 +13,8 @@
       html, body { height: 100%; margin: 0; }
       body {
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
         background: #0f0f10; /* side letterbox */
         overflow: hidden;
       }
@@ -28,6 +27,17 @@
         display: grid;
         place-items: center;
       }
+      /* Hard-center container on desktop, ignore legacy absolute/right styles */
+      #unity-container:not(.unity-mobile) {
+        margin: 0 auto !important;            /* center as block element */
+        inset: auto !important;               /* reset top/right/bottom/left */
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        position: relative !important;        /* avoid absolute positioning from template */
+      }
+
       /* Make canvas obey container size even if JS sets inline px */
       #unity-container:not(.unity-mobile) #unity-canvas {
         width: 100% !important;
@@ -41,6 +51,8 @@
         width: 100% !important;
         box-sizing: border-box;
       }
+    
+      #unity-container:not(.unity-mobile) { margin-inline: auto !important; }
     </style>
 
   </head>
