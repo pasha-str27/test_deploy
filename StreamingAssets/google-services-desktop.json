@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "873130404178",
+    "project_id": "ijoyn-app",
+    "storage_bucket": "ijoyn-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873130404178:android:c79b594a38f65ad901b28b",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.iJoyn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873130404178-vge9o81htajdoe7654ih3dhcc4rvbbik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWe8iv8XevI8hoFDDRs5N1nH2y4QFuGEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873130404178-vge9o81htajdoe7654ih3dhcc4rvbbik.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "873130404178-cam7bs4duc6l8g556ijg0vs1ecbe2ht1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.iJoyn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
