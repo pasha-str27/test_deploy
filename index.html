@@ -9,20 +9,32 @@
   
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <style>
-      html, body { height: 100%; margin: 0; }
-      body { background: #0f0f10; }
+      html, body {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        background: #0f0f10;
+        margin: 0;
+        overflow: hidden;
+      }
+      body {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        background: #0f0f10;
+        margin: 0;
+        overflow: hidden;
+      }
       /* Center the portrait container on desktop */
       #unity-container.unity-desktop {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: min(100vw, calc(100vh * 9 / 16)) !important; /* fit by height when tall */
-        height: auto !important;
-        max-height: 100vh !important;
+        position: relative !important;
+        margin: 0 auto !important;
+        display: grid !important;
+        place-items: center !important;
+        width: min(100vw, calc(100svh * 9 / 16)) !important;
+        height: min(100svh, calc(100vw * 16 / 9)) !important;
         aspect-ratio: 9 / 16;
         overflow: hidden !important;
-        display: block !important;
       }
       /* Canvas obeys container size */
       #unity-container.unity-desktop #unity-canvas {
