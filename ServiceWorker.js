@@ -1,9 +1,9 @@
 const cacheName = "DefaultCompany-iJoyn-1.0";
 const contentToCache = [
-    "Build/Build.loader.js",
-    "Build/Build.framework.js",
-    "Build/Build.data",
-    "Build/Build.wasm",
+    "Build/iJoyn.loader.js",
+    "Build/iJoyn.framework.js",
+    "Build/iJoyn.data",
+    "Build/iJoyn.wasm",
     "TemplateData/style.css"
 
 ];
